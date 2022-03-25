@@ -1,6 +1,7 @@
 //const { Console } = require('console');
 const http = require('http');
 const app = require('./app');
+const server = http.createServer(app);
 
 
 
@@ -45,7 +46,7 @@ const errorHandler = error => {
 
 }
 
-const server = http.createServer(app);
+
 
 server.on('error', errorHandler);
 server.on('listening', () => {
@@ -58,9 +59,9 @@ server.on('listening', () => {
     })
 })
 
-server.listen(port);
+//server.listen(port);
 app.set('port', process.env.PORT || 300)
 
-const server = http.createServer(app, console.log("Server Started"));
+//const server = http.createServer(app, console.log("Server Started"));
 
-server.listen(process.env.PORT || 3000);
+//server.listen(process.env.PORT || 3000);
