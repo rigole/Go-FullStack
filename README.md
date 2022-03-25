@@ -1,1 +1,2 @@
 # Go-FullStack
+ANGULAR+MONGO+NODE+EXPRESS
