@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 app.use(express.json())
+
+const MONGO_URL = 'mongodb+srv://plass:123@nasa-cluster.exsxa.mongodb.net/nasaDatabase?retryWrites=true&w=majority'
+
+mongoose.connect(MONGO_URL, {
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+})
+.then(() => console.log("Sucessfull Connexion to MongoDB"))
+.catch(() => console.log("Unsuccessfull connexion"))
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
