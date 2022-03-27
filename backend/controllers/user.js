@@ -1,6 +1,6 @@
 const userModel = require('../models/user');
 const bcrypt = require('bcrypt');
-const { use } = require('../routes/stuff');
+
 
 exports.signup = (req, res, next) => {
     
@@ -19,5 +19,22 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-
+    userModel.findOne({ email: req.body.email })
+        .then(user => {
+            if(!user){
+                return res.status(401).json({ error: " User Not found" })
+            }
+            bcrypt.compare(req.body.password, user.password)
+                .then(valid => {
+                    if(!valid){
+                        return res.status(401).json({ error:"Incorrect Password" })
+                    }
+                    res.status(200).json({
+                        userId: user._id,
+                        token: 'TOKEN'
+                    });
+                })
+                .catch(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }))
 };
