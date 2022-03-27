@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const stuffControl = require('../controllers/stuff');
 const Thing = require('../models/thing');
 
 router.post('/', (req, res, next) => {
@@ -65,6 +65,8 @@ router.put('/:id', (req, res, next) => {
     }
   );
 });
+
+router.get('/', stuffControl.getAllStuff);
 
 router.delete('/:id', (req, res, next) => {
   Thing.deleteOne({_id: req.params.id}).then(
