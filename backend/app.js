@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Thing = require('./models/thing');
+const stuffRoutes = require('./routes/stuff')
 
 app.use(express.json())
 
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('api/stuff', stuffRoutes);
 
 
 
