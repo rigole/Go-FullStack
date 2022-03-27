@@ -67,6 +67,11 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.get('/', stuffControl.getAllStuff);
+router.post('/', stuffControl.createThing);
+router.get('/:id', stuffControl.getOneThing);
+router.put('/:id', stuffControl.modifyThing);
+router.delete('/:id', stuffControl.deleteThing);
+
 
 router.delete('/:id', (req, res, next) => {
   Thing.deleteOne({_id: req.params.id}).then(
