@@ -2,8 +2,16 @@ const express = require('express');
 const router = express.Router();
 const stuffControl = require('../controllers/stuff');
 const Thing = require('../models/thing');
+const auth = require('../middleware/auth');
 
-router.post('/', (req, res, next) => {
+
+router.get('/', auth, stuffControl.getAllStuff);
+router.post('/', auth,  stuffControl.createThing);
+router.get('/:id', auth, stuffControl.getOneThing);
+router.put('/:id', auth, stuffControl.modifyThing);
+router.delete('/:id', auth, stuffControl.deleteThing);
+
+/*router.post('/', (req, res, next) => {
   const thing = new Thing({
     title: req.body.title,
     description: req.body.description,
@@ -24,9 +32,9 @@ router.post('/', (req, res, next) => {
       });
     }
   );
-});
+});*/
 
-router.get('/:id', (req, res, next) => {
+/*router.get('/:id', (req, res, next) => {
   Thing.findOne({
     _id: req.params.id
   }).then(
@@ -40,9 +48,9 @@ router.get('/:id', (req, res, next) => {
       });
     }
   );
-});
+});*/
 
-router.put('/:id', (req, res, next) => {
+/*router.put('/:id', (req, res, next) => {
   const thing = new Thing({
     _id: req.params.id,
     title: req.body.title,
@@ -64,16 +72,12 @@ router.put('/:id', (req, res, next) => {
       });
     }
   );
-});
-
-router.get('/', stuffControl.getAllStuff);
-router.post('/', stuffControl.createThing);
-router.get('/:id', stuffControl.getOneThing);
-router.put('/:id', stuffControl.modifyThing);
-router.delete('/:id', stuffControl.deleteThing);
+});*/
 
 
-router.delete('/:id', (req, res, next) => {
+
+
+/*router.delete('/:id', (req, res, next) => {
   Thing.deleteOne({_id: req.params.id}).then(
     () => {
       res.status(200).json({
@@ -87,9 +91,9 @@ router.delete('/:id', (req, res, next) => {
       });
     }
   );
-});
+});*/
 
-router.get('/' +
+/*router.get('/' +
   '', (req, res, next) => {
   Thing.find().then(
     (things) => {
@@ -102,6 +106,6 @@ router.get('/' +
       });
     }
   );
-});
+});*/
 
 module.exports = router;
